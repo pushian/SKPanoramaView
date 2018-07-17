@@ -14,8 +14,15 @@ typedef NS_ENUM(NSInteger, SKPanoramaStartPosition)
     SKPanoramaStartPositionRight
 };
 
+@protocol SKPanoramaViewDelegate <NSObject>
+- (void)SKPanoramaAnimationEnd;
+@end
+
+
 @interface SKPanoramaView : UIView
 
+
+@property (weak, nonatomic, nullable) id<SKPanoramaViewDelegate> delegate;
 @property (nonatomic, strong) UIImage *image; //Image in the panorama view
 @property (nonatomic) CGFloat animationSpeed; //Duration of one image animation (greater is longer; default:10s)
 @property (nonatomic, assign) SKPanoramaStartPosition startPosition; //Side from which panorama animation starts from (either right or left side of the image; default:start from left)
@@ -24,5 +31,7 @@ typedef NS_ENUM(NSInteger, SKPanoramaStartPosition)
 
 - (void) startAnimating;
 - (void) stopAnimating;
+- (void) createPanoramaWithImage:(UIImage *)image;
+- (void) updatePanoramaWithImage:(UIImage *)image;
 
 @end
